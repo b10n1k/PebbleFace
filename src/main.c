@@ -19,7 +19,7 @@
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   
-  int hour = abs(tick_time->tm_hour - 15); //15 is the offset from time_zero
+  int hour = abs(tick_time->tm_hour - 15)+(tick_time->tm_min/4); //15 is the offset from time_zero
   pulse = ((hour * 60) / 4) + (tick_time->tm_min / 4);
   int minutes = tick_time->tm_min;
   //breath = ((minutes*60)*4)/100;
@@ -53,8 +53,9 @@ static void bg_update_proc(Layer *layer, GContext *ctx) {
     layer_add_child(window_layer, s_simple_bg_layer);
     
     // Create and Add to layer hierarchy:
-    timelbl = text_layer_create(GRect((bounds.size.w/2)-sizeof(buf), bounds.size.h/2 , bounds.size.w, 30));
+    timelbl = text_layer_create(GRect((bounds.size.w/2)-20, bounds.size.h/2-15 , 50, 50));
     text_layer_set_text(timelbl, buf);
+    text_layer_set_font(timelbl, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
     text_layer_set_background_color(timelbl, GColorBlack);
     text_layer_set_text_color(timelbl, GColorWhite);
     layer_add_child(window_layer, text_layer_get_layer(timelbl));

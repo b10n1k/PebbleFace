@@ -16,15 +16,16 @@
   static GRect bounds;
   static GPoint s_center;
   static int pulse, breath;
+  static int pulse_ticks, breath_ticks;
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   
-  int hour = abs(tick_time->tm_hour - 15)+(tick_time->tm_min/4); //15 is the offset from time_zero
-  pulse = ((hour * 60) / 4) + (tick_time->tm_min / 4);
+  int hour = abs(tick_time->tm_hour - 15); //15 is the offset from time_zero
+  pulse = ((hour * 60) / 4) + (tick_time->tm_min / 4); //convert time -> pulse of 4 beats
   int minutes = tick_time->tm_min;
-  //breath = ((minutes*60)*4)/100;
-  breath = 0;
-  snprintf(buf, 10, "%d.%d", pulse,breath);
+  breath = ((minutes*60)*4)/100;
+  
+  snprintf(buf, 10, "%d.%d", pulse, breath);
   text_layer_set_text(timelbl, buf);
    
 }

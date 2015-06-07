@@ -11,9 +11,13 @@
     },
     "sdkVersion": "3",
     "shortName": "cube",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
     "uuid": "514be4c9-7672-49ce-bca5-c50dd1e5b774",
     "versionLabel": "1.0",
     "watchapp": {
-        "watchface": false
+        "watchface": true
     }
 }

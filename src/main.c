@@ -10,7 +10,6 @@
   
   static Window *s_main_window;
   static TextLayer *timelbl, *layer360, *layer180, *layer90,*layer240;
-  static GPath *s_minute, *s_hour, *s_spider;
   static Layer *s_simple_bg_layer;
   static char buf[10];
   static GRect bounds;
@@ -22,8 +21,8 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   
   int hour = abs(tick_time->tm_hour - 15); //15 is the offset from time_zero
   pulse = ((hour * 60) / 4) + (tick_time->tm_min / 4); //convert time -> pulse of 4 beats
-  int minutes = tick_time->tm_min;
-  breath = ((minutes*60)*4)/100;
+  int minutes = tick_time->tm_sec;
+  breath = ((minutes*60)/4)/100;
   
   snprintf(buf, 10, "%d.%d", pulse, breath);
   text_layer_set_text(timelbl, buf);
@@ -89,9 +88,13 @@ static void bg_update_proc(Layer *layer, GContext *ctx) {
   static void window_unload(Window *window) {
     // Destroy TextLayer
     text_layer_destroy(timelbl);
-
+    //text_layer_destroy(layer360);
+    //text_layer_destroy(layer240);
+    //text_layer_destroy(layer90);
+    //text_layer_destroy(layer180);
+    
     // Destroy Window
-    window_destroy(window);
+    //window_destroy(window);
    }
 
   static void init(){
@@ -111,6 +114,7 @@ static void bg_update_proc(Layer *layer, GContext *ctx) {
   static void deinit(){
      window_destroy(s_main_window);
     //gpath_destroy(s_spider);
+    
   }
 
   int main(void) {

@@ -1,0 +1,19 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "jbonatakis@gmail.com",
+    "longName": "cube",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "cube",
+    "uuid": "514be4c9-7672-49ce-bca5-c50dd1e5b774",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
